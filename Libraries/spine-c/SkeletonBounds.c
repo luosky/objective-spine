@@ -1,53 +1,50 @@
 /******************************************************************************
- * Spine Runtime Software License - Version 1.1
- * 
- * Copyright (c) 2013, Esoteric Software
+ * Spine Runtimes Software License v2.5
+ *
+ * Copyright (c) 2013-2016, Esoteric Software
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms in whole or in part, with
- * or without modification, are permitted provided that the following conditions
- * are met:
- * 
- * 1. A Spine Essential, Professional, Enterprise, or Education License must
- *    be purchased from Esoteric Software and the license must remain valid:
- *    http://esotericsoftware.com/
- * 2. Redistributions of source code must retain this license, which is the
- *    above copyright notice, this declaration of conditions and the following
- *    disclaimer.
- * 3. Redistributions in binary form must reproduce this license, which is the
- *    above copyright notice, this declaration of conditions and the following
- *    disclaimer, in the documentation and/or other materials provided with the
- *    distribution.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
- * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * You are granted a perpetual, non-exclusive, non-sublicensable, and
+ * non-transferable license to use, install, execute, and perform the Spine
+ * Runtimes software and derivative works solely for personal or internal
+ * use. Without the written permission of Esoteric Software (see Section 2 of
+ * the Spine Software License Agreement), you may not (a) modify, translate,
+ * adapt, or develop new applications using the Spine Runtimes or otherwise
+ * create derivative works or improvements of the Spine Runtimes or (b) remove,
+ * delete, alter, or obscure any trademarks or any copyright, trademark, patent,
+ * or other intellectual property or proprietary rights notices on or in the
+ * Software, including any copy thereof. Redistributions in binary or source
+ * form must include this license and terms.
+ *
+ * THIS SOFTWARE IS PROVIDED BY ESOTERIC SOFTWARE "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+ * EVENT SHALL ESOTERIC SOFTWARE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, BUSINESS INTERRUPTION, OR LOSS OF
+ * USE, DATA, OR PROFITS) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+ * IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <SkeletonBounds.h>
+#include <spine/SkeletonBounds.h>
 #include <limits.h>
-#include <extension.h>
+#include <spine/extension.h>
 
-spBoundingPolygon* spBoundingPolygon_create (int capacity) {
-	spBoundingPolygon* self = NEW(spBoundingPolygon);
+spPolygon* spPolygon_create (int capacity) {
+	spPolygon* self = NEW(spPolygon);
 	self->capacity = capacity;
 	CONST_CAST(float*, self->vertices) = MALLOC(float, capacity);
 	return self;
 }
 
-void spBoundingPolygon_dispose (spBoundingPolygon* self) {
+void spPolygon_dispose (spPolygon* self) {
 	FREE(self->vertices);
 	FREE(self);
 }
 
-int/*bool*/spBoundingPolygon_containsPoint (spBoundingPolygon* self, float x, float y) {
+int/*bool*/spPolygon_containsPoint (spPolygon* self, float x, float y) {
 	int prevIndex = self->count - 2;
 	int inside = 0;
 	int i;
@@ -63,7 +60,7 @@ int/*bool*/spBoundingPolygon_containsPoint (spBoundingPolygon* self, float x, fl
 	return inside;
 }
 
-int/*bool*/spBoundingPolygon_intersectsSegment (spBoundingPolygon* self, float x1, float y1, float x2, float y2) {
+int/*bool*/spPolygon_intersectsSegment (spPolygon* self, float x1, float y1, float x2, float y2) {
 	float width12 = x1 - x2, height12 = y1 - y2;
 	float det1 = x1 * y2 - y1 * x2;
 	float x3 = self->vertices[self->count - 2], y3 = self->vertices[self->count - 1];
@@ -98,7 +95,7 @@ spSkeletonBounds* spSkeletonBounds_create () {
 void spSkeletonBounds_dispose (spSkeletonBounds* self) {
 	int i;
 	for (i = 0; i < SUB_CAST(_spSkeletonBounds, self)->capacity; ++i)
-		if (self->polygons[i]) spBoundingPolygon_dispose(self->polygons[i]);
+		if (self->polygons[i]) spPolygon_dispose(self->polygons[i]);
 	FREE(self->polygons);
 	FREE(self->boundingBoxes);
 	FREE(self);
@@ -108,43 +105,43 @@ void spSkeletonBounds_update (spSkeletonBounds* self, spSkeleton* skeleton, int/
 	int i;
 
 	_spSkeletonBounds* internal = SUB_CAST(_spSkeletonBounds, self);
-	if (internal->capacity < skeleton->slotCount) {
-		spBoundingPolygon** newPolygons;
+	if (internal->capacity < skeleton->slotsCount) {
+		spPolygon** newPolygons;
 
 		FREE(self->boundingBoxes);
-		self->boundingBoxes = MALLOC(spBoundingBoxAttachment*, skeleton->slotCount);
+		self->boundingBoxes = MALLOC(spBoundingBoxAttachment*, skeleton->slotsCount);
 
-		newPolygons = CALLOC(spBoundingPolygon*, skeleton->slotCount);
-		memcpy(newPolygons, self->polygons, internal->capacity);
+		newPolygons = CALLOC(spPolygon*, skeleton->slotsCount);
+		memcpy(newPolygons, self->polygons, sizeof(spPolygon*) * internal->capacity);
 		FREE(self->polygons);
 		self->polygons = newPolygons;
 
-		internal->capacity = skeleton->slotCount;
+		internal->capacity = skeleton->slotsCount;
 	}
 
 	self->minX = (float)INT_MAX;
-	self->minY = (float)INT_MIN;
-	self->maxX = (float)INT_MAX;
+	self->minY = (float)INT_MAX;
+	self->maxX = (float)INT_MIN;
 	self->maxY = (float)INT_MIN;
 
 	self->count = 0;
-	for (i = 0; i < skeleton->slotCount; ++i) {
-		spBoundingPolygon* polygon;
+	for (i = 0; i < skeleton->slotsCount; ++i) {
+		spPolygon* polygon;
 		spBoundingBoxAttachment* boundingBox;
 
 		spSlot* slot = skeleton->slots[i];
 		spAttachment* attachment = slot->attachment;
-		if (!attachment || attachment->type != ATTACHMENT_BOUNDING_BOX) continue;
+		if (!attachment || attachment->type != SP_ATTACHMENT_BOUNDING_BOX) continue;
 		boundingBox = (spBoundingBoxAttachment*)attachment;
 		self->boundingBoxes[self->count] = boundingBox;
 
 		polygon = self->polygons[self->count];
-		if (!polygon || polygon->capacity < boundingBox->verticesCount) {
-			if (polygon) spBoundingPolygon_dispose(polygon);
-			self->polygons[self->count] = polygon = spBoundingPolygon_create(boundingBox->verticesCount);
+		if (!polygon || polygon->capacity < boundingBox->super.worldVerticesLength) {
+			if (polygon) spPolygon_dispose(polygon);
+			self->polygons[self->count] = polygon = spPolygon_create(boundingBox->super.worldVerticesLength);
 		}
-		polygon->count = boundingBox->verticesCount;
-		spBoundingBoxAttachment_computeWorldVertices(boundingBox, skeleton->x, skeleton->y, slot->bone, polygon->vertices);
+		polygon->count = boundingBox->super.worldVerticesLength;
+		spVertexAttachment_computeWorldVertices(SUPER(boundingBox), slot, 0, polygon->count, polygon->vertices, 0, 2);
 
 		if (updateAabb) {
 			int ii = 0;
@@ -158,7 +155,7 @@ void spSkeletonBounds_update (spSkeletonBounds* self, spSkeleton* skeleton, int/
 			}
 		}
 
-		++self->count;
+		self->count++;
 	}
 }
 
@@ -189,18 +186,18 @@ int/*bool*/spSkeletonBounds_aabbIntersectsSkeleton (spSkeletonBounds* self, spSk
 spBoundingBoxAttachment* spSkeletonBounds_containsPoint (spSkeletonBounds* self, float x, float y) {
 	int i;
 	for (i = 0; i < self->count; ++i)
-		if (spBoundingPolygon_containsPoint(self->polygons[i], x, y)) return self->boundingBoxes[i];
+		if (spPolygon_containsPoint(self->polygons[i], x, y)) return self->boundingBoxes[i];
 	return 0;
 }
 
 spBoundingBoxAttachment* spSkeletonBounds_intersectsSegment (spSkeletonBounds* self, float x1, float y1, float x2, float y2) {
 	int i;
 	for (i = 0; i < self->count; ++i)
-		if (spBoundingPolygon_intersectsSegment(self->polygons[i], x1, y1, x2, y2)) return self->boundingBoxes[i];
+		if (spPolygon_intersectsSegment(self->polygons[i], x1, y1, x2, y2)) return self->boundingBoxes[i];
 	return 0;
 }
 
-spBoundingPolygon* spSkeletonBounds_getPolygon (spSkeletonBounds* self, spBoundingBoxAttachment* boundingBox) {
+spPolygon* spSkeletonBounds_getPolygon (spSkeletonBounds* self, spBoundingBoxAttachment* boundingBox) {
 	int i;
 	for (i = 0; i < self->count; ++i)
 		if (self->boundingBoxes[i] == boundingBox) return self->polygons[i];
