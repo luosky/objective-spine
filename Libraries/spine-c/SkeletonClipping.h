@@ -31,10 +31,10 @@
 #ifndef SPINE_SKELETONCLIPPING_H
 #define SPINE_SKELETONCLIPPING_H
 
-#include <spine/Array.h>
-#include <spine/ClippingAttachment.h>
-#include <spine/Slot.h>
-#include <spine/Triangulator.h>
+#include <Array.h>
+#include <ClippingAttachment.h>
+#include <Slot.h>
+#include <Triangulator.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -31,8 +31,8 @@
 #ifndef SPINE_VERTEXATTACHMENT_H_
 #define SPINE_VERTEXATTACHMENT_H_
 
-#include <spine/Attachment.h>
-#include <spine/Slot.h>
+#include <Attachment.h>
+#include <Slot.h>
 
 #ifdef __cplusplus
 extern "C" {

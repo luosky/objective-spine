@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/Color.h>
-#include <spine/extension.h>
+#include <Color.h>
+#include <extension.h>
 
 spColor* spColor_create() {
 	return MALLOC(spColor, 1);

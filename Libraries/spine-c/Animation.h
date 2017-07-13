@@ -31,8 +31,8 @@
 #ifndef SPINE_ANIMATION_H_
 #define SPINE_ANIMATION_H_
 
-#include <spine/Event.h>
-#include <spine/Attachment.h>
+#include <Event.h>
+#include <Attachment.h>
 
 #ifdef __cplusplus
 extern "C" {

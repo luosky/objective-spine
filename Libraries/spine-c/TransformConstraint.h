@@ -31,8 +31,8 @@
 #ifndef SPINE_TRANSFORMCONSTRAINT_H_
 #define SPINE_TRANSFORMCONSTRAINT_H_
 
-#include <spine/TransformConstraintData.h>
-#include <spine/Bone.h>
+#include <TransformConstraintData.h>
+#include <Bone.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -28,9 +28,9 @@
 * POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
-#include <spine/Atlas.h>
+#include <Atlas.h>
 #include <ctype.h>
-#include <spine/extension.h>
+#include <extension.h>
 
 spAtlasPage* spAtlasPage_create(spAtlas* atlas, const char* name) {
 	spAtlasPage* self = NEW(spAtlasPage);

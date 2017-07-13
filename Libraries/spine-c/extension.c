@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/extension.h>
+#include <extension.h>
 #include <stdio.h>
 
 static void* (*mallocFunc) (size_t size) = malloc;

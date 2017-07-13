@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/TransformConstraintData.h>
-#include <spine/extension.h>
+#include <TransformConstraintData.h>
+#include <extension.h>
 
 spTransformConstraintData* spTransformConstraintData_create (const char* name) {
 	spTransformConstraintData* self = NEW(spTransformConstraintData);

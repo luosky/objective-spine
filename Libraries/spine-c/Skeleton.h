@@ -31,12 +31,12 @@
 #ifndef SPINE_SKELETON_H_
 #define SPINE_SKELETON_H_
 
-#include <spine/SkeletonData.h>
-#include <spine/Slot.h>
-#include <spine/Skin.h>
-#include <spine/IkConstraint.h>
-#include <spine/TransformConstraint.h>
-#include <spine/PathConstraint.h>
+#include <SkeletonData.h>
+#include <Slot.h>
+#include <Skin.h>
+#include <IkConstraint.h>
+#include <TransformConstraint.h>
+#include <PathConstraint.h>
 
 #ifdef __cplusplus
 extern "C" {

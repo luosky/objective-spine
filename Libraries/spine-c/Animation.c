@@ -28,10 +28,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/Animation.h>
-#include <spine/IkConstraint.h>
+#include <Animation.h>
+#include <IkConstraint.h>
 #include <limits.h>
-#include <spine/extension.h>
+#include <extension.h>
 
 spAnimation* spAnimation_create (const char* name, int timelinesCount) {
 	spAnimation* self = NEW(spAnimation);

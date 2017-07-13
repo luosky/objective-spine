@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/MeshAttachment.h>
-#include <spine/extension.h>
+#include <MeshAttachment.h>
+#include <extension.h>
 
 void _spMeshAttachment_dispose (spAttachment* attachment) {
 	spMeshAttachment* self = SUB_CAST(spMeshAttachment, attachment);

@@ -31,10 +31,10 @@
 #ifndef SPINE_SKELETONBINARY_H_
 #define SPINE_SKELETONBINARY_H_
 
-#include <spine/Attachment.h>
-#include <spine/AttachmentLoader.h>
-#include <spine/SkeletonData.h>
-#include <spine/Atlas.h>
+#include <Attachment.h>
+#include <AttachmentLoader.h>
+#include <SkeletonData.h>
+#include <Atlas.h>
 
 #ifdef __cplusplus
 extern "C" {

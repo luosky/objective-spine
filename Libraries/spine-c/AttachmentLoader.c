@@ -28,9 +28,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/AttachmentLoader.h>
+#include <AttachmentLoader.h>
 #include <stdio.h>
-#include <spine/extension.h>
+#include <extension.h>
 
 typedef struct _spAttachmentLoaderVtable {
 	spAttachment* (*createAttachment) (spAttachmentLoader* self, spSkin* skin, spAttachmentType type, const char* name,

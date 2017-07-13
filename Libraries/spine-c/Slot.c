@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/Slot.h>
-#include <spine/extension.h>
+#include <Slot.h>
+#include <extension.h>
 
 typedef struct {
 	spSlot super;

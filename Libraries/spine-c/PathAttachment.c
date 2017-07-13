@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/PathAttachment.h>
-#include <spine/extension.h>
+#include <PathAttachment.h>
+#include <extension.h>
 
 void _spPathAttachment_dispose (spAttachment* attachment) {
 	spPathAttachment* self = SUB_CAST(spPathAttachment, attachment);

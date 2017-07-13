@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/BoundingBoxAttachment.h>
-#include <spine/extension.h>
+#include <BoundingBoxAttachment.h>
+#include <extension.h>
 
 void _spBoundingBoxAttachment_dispose (spAttachment* attachment) {
 	spBoundingBoxAttachment* self = SUB_CAST(spBoundingBoxAttachment, attachment);

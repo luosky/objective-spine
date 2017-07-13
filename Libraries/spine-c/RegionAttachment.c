@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/RegionAttachment.h>
-#include <spine/extension.h>
+#include <RegionAttachment.h>
+#include <extension.h>
 
 typedef enum {
 	BLX = 0, BLY, ULX, ULY, URX, URY, BRX, BRY

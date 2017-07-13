@@ -31,8 +31,8 @@
 #ifndef SPINE_IKCONSTRAINT_H_
 #define SPINE_IKCONSTRAINT_H_
 
-#include <spine/IkConstraintData.h>
-#include <spine/Bone.h>
+#include <IkConstraintData.h>
+#include <Bone.h>
 
 #ifdef __cplusplus
 extern "C" {

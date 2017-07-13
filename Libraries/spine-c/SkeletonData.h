@@ -31,14 +31,14 @@
 #ifndef SPINE_SKELETONDATA_H_
 #define SPINE_SKELETONDATA_H_
 
-#include <spine/BoneData.h>
-#include <spine/SlotData.h>
-#include <spine/Skin.h>
-#include <spine/EventData.h>
-#include <spine/Animation.h>
-#include <spine/IkConstraintData.h>
-#include <spine/TransformConstraintData.h>
-#include <spine/PathConstraintData.h>
+#include <BoneData.h>
+#include <SlotData.h>
+#include <Skin.h>
+#include <EventData.h>
+#include <Animation.h>
+#include <IkConstraintData.h>
+#include <TransformConstraintData.h>
+#include <PathConstraintData.h>
 
 #ifdef __cplusplus
 extern "C" {

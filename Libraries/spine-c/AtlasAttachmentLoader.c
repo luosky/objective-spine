@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/AtlasAttachmentLoader.h>
-#include <spine/extension.h>
+#include <AtlasAttachmentLoader.h>
+#include <extension.h>
 
 spAttachment* _spAtlasAttachmentLoader_createAttachment (spAttachmentLoader* loader, spSkin* skin, spAttachmentType type,
 		const char* name, const char* path) {

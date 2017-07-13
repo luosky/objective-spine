@@ -31,10 +31,10 @@
 #ifndef SPINE_PATHATTACHMENT_H_
 #define SPINE_PATHATTACHMENT_H_
 
-#include <spine/Attachment.h>
-#include <spine/VertexAttachment.h>
-#include <spine/Atlas.h>
-#include <spine/Slot.h>
+#include <Attachment.h>
+#include <VertexAttachment.h>
+#include <Atlas.h>
+#include <Slot.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/Array.h>
-#include <spine/extension.h>
+#include <Array.h>
+#include <extension.h>
 
 _SP_ARRAY_IMPLEMENT_TYPE(spFloatArray, float)
 _SP_ARRAY_IMPLEMENT_TYPE(spIntArray, int)

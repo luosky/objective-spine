@@ -28,8 +28,8 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/BoneData.h>
-#include <spine/extension.h>
+#include <BoneData.h>
+#include <extension.h>
 
 spBoneData* spBoneData_create (int index, const char* name, spBoneData* parent) {
 	spBoneData* self = NEW(spBoneData);
